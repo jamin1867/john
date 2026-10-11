@@ -101,3 +101,110 @@
   </releases>
 
 </component>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>John the Ripper — Audit Panel</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, sans-serif;
+      background: #10141c;
+      color: #eef2f8;
+    }
+
+    body { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    h1 { margin-bottom: 6px; }
+    .note, .status { color: #aab6c8; }
+    section {
+      margin: 22px 0;
+      padding: 18px;
+      border: 1px solid #293344;
+      border-radius: 12px;
+      background: #171e2a;
+    }
+    h2 { margin-top: 0; font-size: 1.05rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+    button {
+      padding: 12px;
+      color: #eef2f8;
+      background: #253248;
+      border: 1px solid #394b65;
+      border-radius: 8px;
+      text-align: left;
+      cursor: pointer;
+    }
+    button:hover { background: #30415b; }
+    .status { min-height: 1.5em; }
+  </style>
+</head>
+<body>
+  <h1>John the Ripper</h1>
+  <p class="note">Password audit panel · Use only with hashes you own or are authorized to audit.</p>
+
+  <section>
+    <h2>Setup</h2>
+    <div class="grid">
+      <button data-msg="Choose a hash file in your authorized audit environment.">1. Choose hash file</button>
+      <button data-msg="Check that the input file is readable and correctly formatted.">2. Check file</button>
+      <button data-msg="Select the hash format for your authorized test data.">3. Select hash type</button>
+      <button data-msg="Choose an approved wordlist for your audit.">4. Select wordlist</button>
+      <button data-msg="Give this audit session a recognizable name.">5. Name session</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Audit options</h2>
+    <div class="grid">
+      <button data-msg="Wordlist audit selected.">6. Wordlist audit</button>
+      <button data-msg="Rules-based audit selected.">7. Rules-based audit</button>
+      <button data-msg="Single-account audit selected.">8. Single-account audit</button>
+      <button data-msg="Limited incremental audit selected.">9. Incremental audit</button>
+      <button data-msg="Set a time limit for the audit.">10. Set time limit</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Controls</h2>
+    <div class="grid">
+      <button data-msg="Demo only: connect an authorized audit backend to start a session.">11. Start audit</button>
+      <button data-msg="No audit is running in this interface demo.">12. Pause audit</button>
+      <button data-msg="No saved session is connected to this demo.">13. Resume session</button>
+      <button data-msg="No audit is running in this interface demo.">14. Stop audit</button>
+      <button data-msg="Progress will appear here when connected to an audit backend.">15. View progress</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Review</h2>
+    <div class="grid">
+      <button data-msg="Results will appear here after an authorized audit.">16. View results</button>
+      <button data-msg="Session status: UI demo; no audit is running.">17. Check status</button>
+      <button data-msg="Connect an authorized backend to export audit results.">18. Export results</button>
+      <button data-msg="Clear the demo status message.">19. Clear panel</button>
+      <button data-msg="Open the John the Ripper documentation for command details.">20. Help</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Status</h2>
+    <p id="status" class="status" aria-live="polite">Ready. No files have been opened or processed.</p>
+  </section>
+
+  <script>
+    const status = document.querySelector("#status");
+
+    document.querySelectorAll("button").forEach(button => {
+      button.addEventListener("click", () => {
+        status.textContent = button.dataset.msg;
+      });
+    });
+
+    document.querySelectorAll("button")[18].addEventListener("click", () => {
+      status.textContent = "Ready. No files have been opened or processed.";
+    });
+  </script>
+</body>
+</html>
